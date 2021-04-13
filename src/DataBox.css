@@ -1,0 +1,161 @@
+.DataBox {
+    background-color:floralwhite;
+    border-style:solid;
+    border-color: darkblue;
+    margin: 10px;
+    padding: 10px;
+    height: 13cm;
+    width: 13cm;
+    z-index: 200;
+    position:fixed;
+    top:50px;
+    left:50px;
+    color: darkblue;
+    font-family: Candara;
+    font-size: larger;
+}
+.DataBox form
+{
+    display: inline-block;
+}
+.DataBox h2{
+    text-align: center;
+    font-family: "Candara";
+    margin: 0px;
+}
+#makeLabel
+{
+    display: block;
+    margin-left: 88px;
+    padding-top: 10px;
+}
+label
+{
+    display: inline-block;
+    text-align: left;
+    padding-right: 10px;
+
+}
+.DataBox input
+{
+    display: flex;
+    text-align: left;
+    margin-top: 10px;
+    width: 300px;
+    height: 10px;
+    font-size: 15px;
+    padding: 5px;
+    border-color: darkblue;
+    color: darkblue;
+    font-family: Candara;
+}
+#currentCharge
+{
+    width: 45px;
+    display: inline-block;
+}
+#checkbox
+{
+    display: inline-block;
+    width: 20px;
+}
+#submit
+{
+    display: grid;
+    background-color: white;
+    border-width: 3px;
+    border-color: darkblue;
+    color: darkblue;
+    padding: 7px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    font-family: Candara;
+    margin-left: 125px;
+}
+.DataBox-logo {
+    height: 49vmin;
+    pointer-events: none;
+    height: 65px;
+    width: 65px;
+    position: relative;
+    top: 7px;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .DataBox-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+#logo
+{
+    font-size: 50px;
+}
+.box
+{
+    display: inline-block;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #999;
+    font-size: 16px;
+    color: darkblue;
+    background-color: #eee;
+    border-radius: 5px;
+    font-family: Candara;
+
+}
+#submit:hover
+{
+    background-color: darkblue;
+    color: white;
+}
+.search {
+    background-color: white;
+    border-width: 3px;
+    border-color: darkblue;
+    color: darkblue;
+    text-align: center;
+    font-size: 16px;
+    font-family: Candara;
+}
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}

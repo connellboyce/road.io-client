@@ -1,0 +1,22 @@
+#header
+{
+    font-size: 25px;
+    font-family: Candara;
+    color: darkblue;
+}
+
+#htmlMsg
+{
+    font-size: 18px;
+    font-family: Candara;
+    color: darkblue;
+}
+
+#paragraph
+{
+    font-size: 16px;
+    font-family: Candara;
+    color: darkblue;
+    white-space: pre-line;
+}
+
