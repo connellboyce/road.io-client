@@ -24,8 +24,8 @@ class Map extends Component {
         Requires the Spring Boot app to be running!*/
         var data = "";
         const REQUEST = new XMLHttpRequest();
-        REQUEST.open("GET", "http://localhost:8787/secrets/here", false);
-        REQUEST.onload = function () {
+        REQUEST.open("GET", "https://roadio-backend.herokuapp.com/secrets/here",false);
+        REQUEST.onload = function() {
             //Parse JSON
             data = this.response;
         }
