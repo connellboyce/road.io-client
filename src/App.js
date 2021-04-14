@@ -27,7 +27,7 @@ class App extends Component {
     }
 
     render() {
-        const { error, isLoaded, showMap } = this.state;
+        const {error, isLoaded, showMap} = this.state;
         if (error == null) {
             if (showMap) {
                 return (
@@ -42,13 +42,14 @@ class App extends Component {
                         <header className="App-header">
 
                             <p id="introduction">
-                               <animate id="anxiety"> Anxiety-free </animate> driving with
+                                <animate id="anxiety"> Anxiety-free</animate>
+                                driving with
 
                             </p>
                             <p>
-                            <animate id="road"> road.i</animate>
-                            <img src={logo} className="App-logo" alt="logo"/>
-                        </p>
+                                <animate id="road"> road.i</animate>
+                                <img src={logo} className="App-logo" alt="logo"/>
+                            </p>
                             <a className="button1" onClick={this.showTheMap.bind(this)}>Get started</a>
                         </header>
                     </div>
