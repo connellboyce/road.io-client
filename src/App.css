@@ -1,84 +1,90 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  height: 140px;
-  width: 140px;
-  position: relative;
-  top: 10px;
+    height: 40vmin;
+    pointer-events: none;
+    height: 140px;
+    width: 140px;
+    position: relative;
+    top: 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: floralwhite;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: darkblue;
+    background-color: floralwhite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: darkblue;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
-h4
-{
-  font-family: Candara;
+
+h4 {
+    font-family: Candara;
 }
-#introduction{
-  font-family: "Candara";
-font-size: xx-large;
+
+#introduction {
+    font-family: "Candara";
+    font-size: xx-large;
 }
-#anxiety{
-  font-family: "Brush Script MT";
-  font-size: xxx-large;
+
+#anxiety {
+    font-family: "Brush Script MT";
+    font-size: xxx-large;
 }
-#road{
-  font-family: "Candara";
-  font-size: 200px;
+
+#road {
+    font-family: "Candara";
+    font-size: 200px;
 
 }
-a.button1{
-  display:inline-block;
-  padding:0.35em 1.2em;
-  border:0.1em solid #FFFFFF;
-  border-color: darkblue;
-  margin:0 0.3em 0.3em 0;
-  border-radius:0.25em;
-  box-sizing: border-box;
-  text-decoration:none;
-  font-family:"Candara";
-  font-weight:1000;
-  color: darkblue;
-  text-align:center;
-  transition: all 0.2s;
+
+a.button1 {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #FFFFFF;
+    border-color: darkblue;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.25em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Candara";
+    font-weight: 1000;
+    color: darkblue;
+    text-align: center;
+    transition: all 0.2s;
 }
-a.button1:hover{
-  color: white;
-  background-color:darkblue;
+
+a.button1:hover {
+    color: white;
+    background-color: darkblue;
 }
-@media all and (max-width:30em){
-  a.button1{
-    display:block;
-    margin:0.4em auto;
+
+@media all and (max-width: 30em) {
+    a.button1 {
+        display: block;
+        margin: 0.4em auto;
     }
 }

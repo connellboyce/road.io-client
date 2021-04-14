@@ -9,7 +9,7 @@ class DataBox extends React.Component {
         super(props);
 
         this.state = {
-            disabled : false,
+            disabled: false,
             carInfo: "",
             form: {
                 origin: {},
@@ -21,6 +21,8 @@ class DataBox extends React.Component {
                 destination: {}
             }
         }
+
+
         this.onSubmitForm = this.onSubmitForm.bind(this);
         this.changeFormValue = this.changeFormValue.bind(this);
         this.changeOrigin = this.changeOrigin.bind(this);
@@ -30,20 +32,21 @@ class DataBox extends React.Component {
         this.toggleDestinationSearch = this.toggleDestinationSearch.bind(this);
         this.autocomplete = this.autocomplete.bind(this);
     }
-    HandleChange()
-    {
+
+
+    HandleChange() {
         this.setState({disabled: !this.state.disabled})
     }
+
 
     toggleOriginSearch(value) {
         let originFragment = value;
         let originResponse = "";
 
         const ORIGIN_SEARCH_REQUEST = new XMLHttpRequest();
-        ORIGIN_SEARCH_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/"+originFragment.toString()+"/USA", false);
-        ORIGIN_SEARCH_REQUEST.onload = function() {
+        ORIGIN_SEARCH_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/" + originFragment.toString() + "/USA", false);
+        ORIGIN_SEARCH_REQUEST.onload = function () {
             originResponse = JSON.parse(this.response);
-            console.log(originResponse);
         }
         ORIGIN_SEARCH_REQUEST.send();
         return originResponse;
@@ -55,10 +58,9 @@ class DataBox extends React.Component {
         let destinationResponse = "";
 
         const DESTINATION_SEARCH_REQUEST = new XMLHttpRequest();
-        DESTINATION_SEARCH_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/"+destinationFragment+"/USA", false);
-        DESTINATION_SEARCH_REQUEST.onload = function() {
+        DESTINATION_SEARCH_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/" + destinationFragment + "/USA", false);
+        DESTINATION_SEARCH_REQUEST.onload = function () {
             destinationResponse = JSON.parse(this.response);
-            console.log(destinationResponse);
         }
         DESTINATION_SEARCH_REQUEST.send();
         return destinationResponse;
@@ -114,10 +116,31 @@ class DataBox extends React.Component {
         });
     }
 
+    /*function to test whether or not user input areas have valid values
+returns an array of "errors" if there are invalid inputs, otherwise returns empty array*/
+    handleValidation(origin, destination, currentCharge, dropdown) {
+        let errors = [];
+        if (origin == null || origin == "" || origin == "[object Object]") {
+            errors.push(" Please enter a valid starting point ");
+        }
+        if ((this.state.disabled) && (destination == null || destination == "" || destination == "[object Object]")) {
+            errors.push(" Please enter a valid ending point ");
+        }
+        if ((this.state.disabled) && (currentCharge == null || (!(currentCharge > 0 && currentCharge < 100)) || currentCharge == "")) {
+            errors.push(" Please enter a valid current charge ");
+        }
+        if (dropdown == null || dropdown == "") {
+            errors.push("Please select a car type ");
+        }
+        return errors;
+    }
+
     onSubmitForm() {
+
         let lclProps = this.props;
         var carInfo = this.state.carInfo.split("/");
         var origin = this.state.form.origin;
+
         var destination = this.state.form.destination;
         var outletType = carInfo[0];
         var speedTable = carInfo[1];
@@ -130,52 +153,52 @@ class DataBox extends React.Component {
         var originCoordResponse = "";
         var destinationCoordResponse = "";
 
-        const ORIGIN_COORD_REQUEST = new XMLHttpRequest();
-        ORIGIN_COORD_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/"+origin+"/USA", false);
-        ORIGIN_COORD_REQUEST.onload = function() {
-            let response = JSON.parse(this.response);
-            originCoordResponse = response.items[0].position.lat + "," + response.items[0].position.lng;
-        }
-        ORIGIN_COORD_REQUEST.send();
 
-        if (this.state.disabled === true) {
-            const DESTINATION_COORD_REQUEST = new XMLHttpRequest();
-            DESTINATION_COORD_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/"+destination+"/USA", false);
-            DESTINATION_COORD_REQUEST.onload = function() {
+        if ((this.handleValidation(this.state.form.origin, this.state.form.destination, this.state.form.currentCharge,
+            document.getElementById("makeModel").value).length != 0)) //errors are present do not run requests
+        {
+            window.alert(this.handleValidation(this.state.form.origin, this.state.form.destination, this.state.form.currentCharge,
+                document.getElementById("makeModel").value));
+        } else { //run requests
+
+            const ORIGIN_COORD_REQUEST = new XMLHttpRequest();
+            ORIGIN_COORD_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/" + origin + "/USA", false);
+            ORIGIN_COORD_REQUEST.onload = function () {
                 let response = JSON.parse(this.response);
-                destinationCoordResponse = response.items[0].position.lat + "," + response.items[0].position.lng;
+                originCoordResponse = response.items[0].position.lat + "," + response.items[0].position.lng;
             }
-            DESTINATION_COORD_REQUEST.send();
-        }
+            ORIGIN_COORD_REQUEST.send();
 
-        if (this.state.disabled === false) {
-            var coordinates = originCoordResponse.split(",");
-            const ROUTE_REQUEST = new XMLHttpRequest();                   // Search within 100 miles, but it will max out at 20 charging stations
-            ROUTE_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/stations/near/"+coordinates[0]+"/"+coordinates[1]+"/"+ 100, true);
-            ROUTE_REQUEST.onload = function() {
-                routeResponse = JSON.parse(this.response);
-                //For dev. only
-                console.log(routeResponse);
-
-                lclProps.getCgStations(coordinates, range, routeResponse);
+            if (this.state.disabled === true) {
+                const DESTINATION_COORD_REQUEST = new XMLHttpRequest();
+                DESTINATION_COORD_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/autocomplete/" + destination + "/USA", false);
+                DESTINATION_COORD_REQUEST.onload = function () {
+                    let response = JSON.parse(this.response);
+                    destinationCoordResponse = response.items[0].position.lat + "," + response.items[0].position.lng;
+                }
+                DESTINATION_COORD_REQUEST.send();
             }
-            ROUTE_REQUEST.send();
-        }
-        else if (this.state.disabled === true) {
-            const ROUTE_REQUEST = new XMLHttpRequest();
-            ROUTE_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/stations/along/"+originCoordResponse+"/"+outletType+"/"+destinationCoordResponse+"/"+speedTable+"/"+currentCharge+"/"+maxCharge+"/"+chargingCurve+"/"+maxChargeAfterChargingStation, true);
-            ROUTE_REQUEST.onload = function() {
-                routeResponse = JSON.parse(this.response);
-                //For dev. only
-                console.log(routeResponse)
 
-                lclProps.displayRoute(routeResponse);
+
+            if (this.state.disabled === false) {
+                var coordinates = originCoordResponse.split(",");
+                const ROUTE_REQUEST = new XMLHttpRequest();                   // Search within 100 miles, but it will max out at 20 charging stations
+                ROUTE_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/stations/near/" + coordinates[0] + "/" + coordinates[1] + "/" + 100, true);
+                ROUTE_REQUEST.onload = function () {
+                    routeResponse = JSON.parse(this.response);
+                    lclProps.getCgStations(coordinates, range, routeResponse);
+                }
+                ROUTE_REQUEST.send();
+            } else if (this.state.disabled === true) {
+                const ROUTE_REQUEST = new XMLHttpRequest();
+                ROUTE_REQUEST.open("GET", BACKEND_API_ENDPOINT + "/stations/along/" + originCoordResponse + "/" + outletType + "/" + destinationCoordResponse + "/" + speedTable + "/" + currentCharge + "/" + maxCharge + "/" + chargingCurve + "/" + maxChargeAfterChargingStation, true);
+                ROUTE_REQUEST.onload = function () {
+                    routeResponse = JSON.parse(this.response);
+                    lclProps.displayRoute(routeResponse);
+                }
+                ROUTE_REQUEST.send();
             }
-            ROUTE_REQUEST.send();
-        } else {
-            console.log("State error for variable: disabled");
         }
-
     }
 
     //From w3schools -> https://www.w3schools.com/howto/howto_js_autocomplete.asp
@@ -187,8 +210,6 @@ class DataBox extends React.Component {
             inp = document.getElementById("destinationInput");
         }
 
-        console.log(returnObject);
-        console.log(returnObject.items);
         let arr = [];
         if (returnObject.items != null || returnObject.items != "") {
             for (let i = 0; i < returnObject.items.length; i++) {
@@ -204,11 +225,13 @@ class DataBox extends React.Component {
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
         /*execute a function when someone writes in the text field:*/
-        inp.addEventListener("input", function(e) {
+        inp.addEventListener("input", function (e) {
             var a, b, i, val = this.value;
             /*close any already open lists of autocompleted values*/
             closeAllLists();
-            if (!val) { return false;}
+            if (!val) {
+                return false;
+            }
             currentFocus = -1;
             /*create a DIV element that will contain the items (values):*/
             a = document.createElement("DIV");
@@ -228,7 +251,7 @@ class DataBox extends React.Component {
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                     /*execute a function when someone clicks on the item value (DIV element):*/
-                    b.addEventListener("click", function(e) {
+                    b.addEventListener("click", function (e) {
                         /*insert the value for the autocomplete text field:*/
                         inp.value = this.getElementsByTagName("input")[0].value;
                         /*close the list of autocompleted values,
@@ -240,7 +263,7 @@ class DataBox extends React.Component {
             }
         });
         /*execute a function presses a key on the keyboard:*/
-        inp.addEventListener("keydown", function(e) {
+        inp.addEventListener("keydown", function (e) {
             var x = document.getElementById(this.id + "autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
             if (e.keyCode === 40) {
@@ -264,6 +287,7 @@ class DataBox extends React.Component {
                 }
             }
         });
+
         function addActive(x) {
             /*a function to classify an item as "active":*/
             if (!x) return false;
@@ -274,12 +298,14 @@ class DataBox extends React.Component {
             /*add class "autocomplete-active":*/
             x[currentFocus].classList.add("autocomplete-active");
         }
+
         function removeActive(x) {
             /*a function to remove the "active" class from all autocomplete items:*/
             for (var i = 0; i < x.length; i++) {
                 x[i].classList.remove("autocomplete-active");
             }
         }
+
         function closeAllLists(elmnt) {
             /*close all autocomplete lists in the document,
             except the one passed as an argument:*/
@@ -290,13 +316,14 @@ class DataBox extends React.Component {
                 }
             }
         }
+
         /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
             closeAllLists(e.target);
         });
     }
 
-   render() {
+    render() {
 
         return (
             <div className="DataBox">
@@ -306,13 +333,11 @@ class DataBox extends React.Component {
 
                     </div>
 
-
-
                     <label htmlFor="">Starting point</label>
                     <br/>
                     <div className="autocomplete">
                         <input id="originInput" type="text" onChange={this.changeOrigin} name="startingPoint"
-                           placeholder="Pollock Road, University Park, PA"/>
+                               placeholder="Pollock Road, University Park, PA"/>
                     </div>
                     <br/>
                     <br/>
@@ -321,26 +346,39 @@ class DataBox extends React.Component {
                     <input type="checkbox" id="checkbox" onChange={this.HandleChange.bind(this)}/>
                     <br/>
                     <div className="autocomplete">
-                    <input id="destinationInput" type="text" onChange={this.changeDestination} name="endingPoint"
-                           placeholder="Tampa, FL" disabled={(!this.state.disabled)}/>
+                        <input id="destinationInput" type="text" onChange={this.changeDestination} name="endingPoint"
+                               placeholder="Tampa, FL" disabled={(!this.state.disabled)}/>
                     </div>
                     <br/>
 
                     <h4>EV Specs</h4>
                     <label htmlFor="">Current State of Charge</label>
-                    <input type="text" name="currentCharge" id="currentCharge" placeholder="80" onChange={this.changeCharge}/> <label>%</label>
-
+                    <input type="text" name="currentCharge" id="currentCharge" placeholder="80"
+                           onChange={this.changeCharge}
+                           disabled={(!this.state.disabled)}/> <label>%</label>
 
                     <label id="makeLabel"> Make and Model </label>
-                    <select className="box" onChange={this.changeFormValue}>
+                    <select className="box" id="makeModel" onChange={this.changeFormValue}>
                         <option value=""></option>
-                        <option value="iec62196Type1Combo/110,0.165/60/0,50,9,52,12,54,15,54,18,54,21,54,24,55,27,55,30,55,33,37,36,37,39,37,42,23,45,23,48,23,51,16,54,16,57,10,60,4/60/383023.9"> Chevy Bolt 2017-2019</option>
-                        <option value="tesla,iec62196Type1Combo/110,0.15/79/0,50,7.9,100,15.8,120,23.7,120,31.6,120,39.5,120,47.4,90,55.3,80,63.2,55,71.1,30,79,5/79/498896.6"> Tesla Model 3 Long Range</option>
-                        <option value="iec62196Type1Combo/110,0.131/28/0,40,2.8,43,5.6,44,8.4,45,11.2,45,14,46,16.8,47,19.6,48,22.4,45,25.2,23,28,5/28/199558.7"> Hyundai Ioniq Electric</option>
-                        <option value="iec62196Type1Combo/110,0.164/64/0,40,6.4,70,12.8,72,19.2,73,25.6,74,32,76,38.4,57,44.8,58,51.2,24,57.6,22,64,10/64/415210.8"> Hyundai Kona Electric</option>
+                        <option
+                            value="iec62196Type1Combo/110,0.165/60/0,50,9,52,12,54,15,54,18,54,21,54,24,55,27,55,30,55,33,37,36,37,39,37,42,23,45,23,48,23,51,16,54,16,57,10,60,4/60/383023.9"> Chevy
+                            Bolt 2017-2019
+                        </option>
+                        <option
+                            value="tesla,iec62196Type1Combo/110,0.15/79/0,50,7.9,100,15.8,120,23.7,120,31.6,120,39.5,120,47.4,90,55.3,80,63.2,55,71.1,30,79,5/79/498896.6"> Tesla
+                            Model 3 Long Range
+                        </option>
+                        <option
+                            value="iec62196Type1Combo/110,0.131/28/0,40,2.8,43,5.6,44,8.4,45,11.2,45,14,46,16.8,47,19.6,48,22.4,45,25.2,23,28,5/28/199558.7"> Hyundai
+                            Ioniq Electric
+                        </option>
+                        <option
+                            value="iec62196Type1Combo/110,0.164/64/0,40,6.4,70,12.8,72,19.2,73,25.6,74,32,76,38.4,57,44.8,58,51.2,24,57.6,22,64,10/64/415210.8"> Hyundai
+                            Kona Electric
+                        </option>
                     </select>
 
-                    <button type="button" id = "submit" onClick={this.onSubmitForm}>Submit</button>
+                    <button type="button" id="submit" onClick={this.onSubmitForm}>Submit</button>
 
                 </form>
             </div>
@@ -348,6 +386,5 @@ class DataBox extends React.Component {
 
     }
 }
-
 
 export default DataBox;
