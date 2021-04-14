@@ -2,7 +2,7 @@ import React from 'react';
 import "./DataBox.css";
 import logo from "./globe-png-9acqaaMTM.png";
 
-const BACKEND_API_ENDPOINT = "http://localhost:8787/api";
+const BACKEND_API_ENDPOINT = "https://roadio-backend.herokuapp.com/api";
 
 class DataBox extends React.Component {
     constructor(props) {
