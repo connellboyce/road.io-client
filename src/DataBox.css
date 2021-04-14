@@ -1,43 +1,44 @@
 .DataBox {
-    background-color:floralwhite;
-    border-style:solid;
+    background-color: floralwhite;
+    border-style: solid;
     border-color: darkblue;
     margin: 10px;
     padding: 10px;
     height: 13cm;
     width: 13cm;
     z-index: 200;
-    position:fixed;
-    top:50px;
-    left:50px;
+    position: fixed;
+    top: 50px;
+    left: 50px;
     color: darkblue;
     font-family: Candara;
     font-size: larger;
 }
-.DataBox form
-{
+
+.DataBox form {
     display: inline-block;
 }
-.DataBox h2{
+
+.DataBox h2 {
     text-align: center;
     font-family: "Candara";
     margin: 0px;
 }
-#makeLabel
-{
+
+#makeLabel {
     display: block;
     margin-left: 88px;
     padding-top: 10px;
 }
-label
-{
+
+label {
     display: inline-block;
     text-align: left;
     padding-right: 10px;
 
 }
-.DataBox input
-{
+
+.DataBox input {
     display: flex;
     text-align: left;
     margin-top: 10px;
@@ -49,18 +50,18 @@ label
     color: darkblue;
     font-family: Candara;
 }
-#currentCharge
-{
+
+#currentCharge {
     width: 45px;
     display: inline-block;
 }
-#checkbox
-{
+
+#checkbox {
     display: inline-block;
     width: 20px;
 }
-#submit
-{
+
+#submit {
     display: grid;
     background-color: white;
     border-width: 3px;
@@ -73,6 +74,7 @@ label
     font-family: Candara;
     margin-left: 125px;
 }
+
 .DataBox-logo {
     height: 49vmin;
     pointer-events: none;
@@ -81,11 +83,13 @@ label
     position: relative;
     top: 7px;
 }
+
 @media (prefers-reduced-motion: no-preference) {
     .DataBox-logo {
         animation: App-logo-spin infinite 20s linear;
     }
 }
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -94,12 +98,12 @@ label
         transform: rotate(360deg);
     }
 }
-#logo
-{
+
+#logo {
     font-size: 50px;
 }
-.box
-{
+
+.box {
     display: inline-block;
     width: 200px;
     height: 30px;
@@ -111,11 +115,12 @@ label
     font-family: Candara;
 
 }
-#submit:hover
-{
+
+#submit:hover {
     background-color: darkblue;
     color: white;
 }
+
 .search {
     background-color: white;
     border-width: 3px;
@@ -125,6 +130,7 @@ label
     font-size: 16px;
     font-family: Candara;
 }
+
 .autocomplete {
     position: relative;
     display: inline-block;
