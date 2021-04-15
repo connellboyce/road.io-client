@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Road.io Server
+IST440W Capstone Project
+- Operates in combination with [Road.io Server](https://github.com/connellboyce/road.io-server)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Created by
+- [Connell Boyce](https://github.com/connellboyce)
+- [Kellia Cockerill](https://github.com/kelliacockerill)
+- [Caden Martz](https://github.com/CadenRM)
 
-## Available Scripts
+### Table of Contents
+1. [Components](#1-components)
+2. [Dependencies](#2-dependencies)
+3. [Plugins](#3-plugins)
+4. [Use Cases](#4-use-cases)
+5. [Project Demonstration](#5-project-demonstration)
+6. [Developer Documentation](#6-developer-documentation)
+7. [External Resources](#7-external-resources)
 
-In the project directory, you can run:
+### **1**. Components
+- Java 8
+- Spring Boot 2.4.3
+- Maven 3.6.3
 
-### `npm start`
+### **2**. Dependencies
+- Spring Framework
+    - Starter Web
+    - Starter Test
+    - WebFlux
+- ReactJS
+- JUnit
+    
+### **3**. Plugins
+- Maven
+- Maven Project Info Reports
+- Maven Javadoc
+- Maven Site
+- JaCoCo
+    
+### **4**. Use Cases
+- User would like to travel from point A to point B but does not know where charging stations are located and cannot complete the trip without a charge.
+    - Application opened
+    - User checks the box to allow for an ending point
+    - Origin, destination, percentage of charge currently remaining, and vehicle make and model are specified
+    - User presses submit
+    - Application provides routing for this trip with markers for origin, destination, and all charging stations.
+- User would like to find charging stations nearby.
+    - Application opened
+    - User specifies origin and car make and model
+    - User pressed submit
+    - Application provides local charging stations and visualizes the radius the user is able to travel with their vehicle's charge as a blue-tinted circle    
+    
+### **5**. Project Demonstration
+Road.io combines long distance route planning for electric vehicles with range visualization measures to directly combat common fears surrounding a switch to an electric vehicle.
+- Landing page
+![](documentation/images/landing.png)
+- Long-distance route planning
+![](documentation/images/routing.png)
+- Displaying local charging stations
+![](documentation/images/local.png)
+- Input validation
+![](documentation/images/error.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### **6**. Developer Documentation
+- [Frontend Developer Notes](documentation/FRONTEND.md)
+- [Backend Developer Notes](documentation/BACKEND.md)
+- [Deployment Developer Notes](documentation/DEPLOYMENT.md)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### **7**. External Resources
+- [HERE API](https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html)
+- [NREL API](https://developer.nrel.gov/)
+- Spring Boot tutorials courtesy of [Baeldung](https://www.baeldung.com/)
