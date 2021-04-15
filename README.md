@@ -1,4 +1,4 @@
-# Road.io Server
+# Road.io Client
 IST440W Capstone Project
 - Operates in combination with [Road.io Server](https://github.com/connellboyce/road.io-server)
 
