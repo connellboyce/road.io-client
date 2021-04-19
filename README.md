@@ -9,11 +9,11 @@ IST440W Capstone Project
 
 ### Table of Contents
 1. [Components](#1-components)
-2. [Libraries](#2-dependencies)
-3. [Use Cases](#4-use-cases)
-4. [Project Demonstration](#5-project-demonstration)
-5. [Developer Documentation](#6-developer-documentation)
-6. [External Resources](#7-external-resources)
+2. [Libraries](#2-libraries)
+3. [Use Cases](#3-use-cases)
+4. [Project Demonstration](#4-project-demonstration)
+5. [Developer Documentation](#5-developer-documentation)
+6. [External Resources](#6-external-resources)
 
 ### **1**. Components
 - npm 7.5.4
