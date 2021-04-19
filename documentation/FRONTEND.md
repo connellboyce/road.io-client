@@ -18,7 +18,7 @@
   - This component renders a box containing input fields and serves as the main place for user input. 
   - Autocomplete...
   - One method fires when the submit button is clicked, gathering up the user's input, validating it by calling a second method, and making a request to the appropriate backend API. After recieving a response, this is passed off to one of the two Map.js methods.  
-    - Input Validation...
+    - Input is validated using the handleValidation() method which passes the user input for each field as parameters. These variables are tested to be sure they are acceptable to be used in the API requests. If the input is valid, the requests will run, if it is not, a pop up window will alert the user of what they are missing.
 
 ### Other Libraries
 - testing-library and Mock Service Worker are lightly used for some tests.
