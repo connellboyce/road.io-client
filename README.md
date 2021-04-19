@@ -9,34 +9,21 @@ IST440W Capstone Project
 
 ### Table of Contents
 1. [Components](#1-components)
-2. [Dependencies](#2-dependencies)
-3. [Plugins](#3-plugins)
-4. [Use Cases](#4-use-cases)
-5. [Project Demonstration](#5-project-demonstration)
-6. [Developer Documentation](#6-developer-documentation)
-7. [External Resources](#7-external-resources)
+2. [Libraries](#2-dependencies)
+3. [Use Cases](#4-use-cases)
+4. [Project Demonstration](#5-project-demonstration)
+5. [Developer Documentation](#6-developer-documentation)
+6. [External Resources](#7-external-resources)
 
 ### **1**. Components
-- Java 8
-- Spring Boot 2.4.3
-- Maven 3.6.3
-
-### **2**. Dependencies
-- Spring Framework
-    - Starter Web
-    - Starter Test
-    - WebFlux
+- npm 7.5.4
 - ReactJS
-- JUnit
+
+### **2**. Libraries
+- Testing-library
+- Mock Service Worker
     
-### **3**. Plugins
-- Maven
-- Maven Project Info Reports
-- Maven Javadoc
-- Maven Site
-- JaCoCo
-    
-### **4**. Use Cases
+### **3**. Use Cases
 - User would like to travel from point A to point B but does not know where charging stations are located and cannot complete the trip without a charge.
     - Application opened
     - User checks the box to allow for an ending point
@@ -49,7 +36,7 @@ IST440W Capstone Project
     - User pressed submit
     - Application provides local charging stations and visualizes the radius the user is able to travel with their vehicle's charge as a blue-tinted circle    
     
-### **5**. Project Demonstration
+### **4**. Project Demonstration
 Road.io combines long distance route planning for electric vehicles with range visualization measures to directly combat common fears surrounding a switch to an electric vehicle.
 - Landing page
 ![](documentation/images/landing.png)
@@ -60,12 +47,10 @@ Road.io combines long distance route planning for electric vehicles with range v
 - Input validation
 ![](documentation/images/error.png)
 
-### **6**. Developer Documentation
+### **5**. Developer Documentation
 - [Frontend Developer Notes](documentation/FRONTEND.md)
-- [Backend Developer Notes](documentation/BACKEND.md)
-- [Deployment Developer Notes](documentation/DEPLOYMENT.md)
+- [Deployment Developer Notes](https://github.com/connellboyce/road.io-server/blob/main/documentation/DEPLOYMENT.md)
 
-### **7**. External Resources
+### **6**. External Resources
 - [HERE API](https://developer.here.com/documentation/geocoding-search-api/api-reference-swagger.html)
 - [NREL API](https://developer.nrel.gov/)
-- Spring Boot tutorials courtesy of [Baeldung](https://www.baeldung.com/)
