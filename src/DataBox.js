@@ -126,7 +126,7 @@ returns an array of "errors" if there are invalid inputs, otherwise returns empt
         if ((this.state.disabled) && (destination == null || destination == "" || destination == "[object Object]")) {
             errors.push(" Please enter a valid ending point ");
         }
-        if ((this.state.disabled) && (currentCharge == null || (!(currentCharge > 0 && currentCharge < 100)) || currentCharge == "")) {
+        if ((this.state.disabled) && (currentCharge == null || (!(currentCharge > 0 && currentCharge <= 100)) || currentCharge == "")) {
             errors.push(" Please enter a valid current charge ");
         }
         if (dropdown == null || dropdown == "") {
